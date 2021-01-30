@@ -4,7 +4,7 @@ import AdvicePage from './pages/AdvicePage'
 function App() {
   return (
     <Router>
-      <div>
+      <div className="container">
         <Switch>
           <Route path="/">
             <AdvicePage />

@@ -48,7 +48,6 @@ export const {
   selectById: selectAdviceById,
 } = adviceAdapter.getSelectors((state) => state.advice)
 
-export const selectAdviceIsFetching = (state) =>
-  state.advice.status === 'pending'
+export const selectAdviceStatus = (state) => state.advice.status
 
 export default adviceSlice.reducer

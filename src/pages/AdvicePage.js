@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchAdvice,
   selectAdviceIds,
-  selectAdviceIsFetching,
+  selectAdviceStatus,
 } from '../redux/advice.slice'
 import { useDebounce } from '../hooks/useDebounce'
 import AdviceList from '../components/AdviceList'
@@ -30,7 +30,8 @@ const Search = ({ value, onChange }) => {
 export default function AdvicePage() {
   const dispatch = useDispatch()
   const adviceIds = useSelector(selectAdviceIds)
-  const isFetching = useSelector(selectAdviceIsFetching)
+  const isFetching = useSelector(selectAdviceStatus) === 'pending'
+  const isIdle = useSelector(selectAdviceStatus) === 'idle'
 
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query, 300)
@@ -44,7 +45,7 @@ export default function AdvicePage() {
   }, [debouncedQuery, dispatch])
 
   return (
-    <div className="container">
+    <main>
       <div className="section">
         <nav className="level">
           <div className="level-left">
@@ -58,7 +59,7 @@ export default function AdvicePage() {
           </div>
         </nav>
 
-        {query === '' && adviceIds.length === 0 ? (
+        {isIdle ? (
           <div className="section has-background-light">
             <div className="content">
               <p>Use the search above to find advice!</p>
@@ -68,6 +69,6 @@ export default function AdvicePage() {
           <AdviceList isFetching={isFetching} ids={adviceIds} />
         )}
       </div>
-    </div>
+    </main>
   )
 }
