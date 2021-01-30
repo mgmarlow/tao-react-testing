@@ -1,63 +1,35 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchAdvice,
   selectAdviceIds,
   selectAdviceStatus,
 } from '../redux/advice.slice'
-import { useDebounce } from '../hooks/useDebounce'
+import { useSearchParams } from '../hooks/useSearchParams'
 import AdviceList from '../components/AdviceList'
-
-const Search = ({ value, onChange }) => {
-  const handleChange = (e) => {
-    onChange(e.target.value)
-  }
-
-  return (
-    <div className="field">
-      <p className="control">
-        <input
-          className="input"
-          type="text"
-          onChange={handleChange}
-          value={value}
-        />
-      </p>
-    </div>
-  )
-}
+import SearchNav from '../components/SearchNav'
 
 export default function AdvicePage() {
   const dispatch = useDispatch()
+  const params = useSearchParams()
   const adviceIds = useSelector(selectAdviceIds)
   const isFetching = useSelector(selectAdviceStatus) === 'pending'
   const isIdle = useSelector(selectAdviceStatus) === 'idle'
 
-  const [query, setQuery] = useState('')
-  const debouncedQuery = useDebounce(query, 300)
+  const query = params.get('q') || ''
 
   useEffect(() => {
-    if (!debouncedQuery) {
+    if (!query) {
       return
     }
 
-    dispatch(fetchAdvice({ query: debouncedQuery }))
-  }, [debouncedQuery, dispatch])
+    dispatch(fetchAdvice({ query }))
+  }, [query, dispatch])
 
   return (
     <main>
       <div className="section">
-        <nav className="level">
-          <div className="level-left">
-            <div className="level-item">
-              <h1 className="title">Free Advice</h1>
-            </div>
-
-            <div className="level-item">
-              <Search value={query} onChange={setQuery} />
-            </div>
-          </div>
-        </nav>
+        <SearchNav />
 
         {isIdle ? (
           <div className="section has-background-light">
