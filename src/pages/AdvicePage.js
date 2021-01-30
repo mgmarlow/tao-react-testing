@@ -13,9 +13,10 @@ export default function AdvicePage() {
   const dispatch = useDispatch()
   const params = useSearchParams()
   const adviceIds = useSelector(selectAdviceIds)
-  const isFetching = useSelector(selectAdviceStatus) === 'pending'
-  const isIdle = useSelector(selectAdviceStatus) === 'idle'
+  const status = useSelector(selectAdviceStatus)
 
+  const isFetching = status === 'pending'
+  const isIdle = status === 'idle'
   const query = params.get('q') || ''
 
   useEffect(() => {
