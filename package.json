@@ -22,7 +22,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "slidedeck": "fusuma start"
+    "slides:start": "fusuma start",
+    "slides:deploy": "fusuma build && fusuma deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
