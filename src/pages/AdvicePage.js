@@ -9,24 +9,7 @@ import { useSearchParams } from '../hooks/useSearchParams'
 import AdviceList from '../components/AdviceList'
 import SearchNav from '../components/SearchNav'
 
-export default function AdvicePage() {
-  const dispatch = useDispatch()
-  const params = useSearchParams()
-  const adviceIds = useSelector(selectAdviceIds)
-  const status = useSelector(selectAdviceStatus)
-
-  const isFetching = status === 'pending'
-  const isIdle = status === 'idle'
-  const query = params.get('q') || ''
-
-  useEffect(() => {
-    if (!query) {
-      return
-    }
-
-    dispatch(fetchAdvice({ query }))
-  }, [query, dispatch])
-
+function AdvicePage({ isIdle, isFetching, adviceIds }) {
   return (
     <main>
       <div className="section">
@@ -43,5 +26,34 @@ export default function AdvicePage() {
         )}
       </div>
     </main>
+  )
+}
+
+function useFetchAdvice() {
+  const dispatch = useDispatch()
+  const params = useSearchParams()
+
+  const query = params.get('q') || ''
+
+  useEffect(() => {
+    if (!query) {
+      return
+    }
+
+    dispatch(fetchAdvice({ query }))
+  }, [query, dispatch])
+}
+
+export default function AdvicePageContainer() {
+  const adviceIds = useSelector(selectAdviceIds)
+  const status = useSelector(selectAdviceStatus)
+
+  const isFetching = status === 'pending'
+  const isIdle = status === 'idle'
+
+  useFetchAdvice()
+
+  return (
+    <AdvicePage isIdle={isIdle} isFetching={isFetching} adviceIds={adviceIds} />
   )
 }

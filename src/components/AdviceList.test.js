@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux'
-import { createStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import { screen, render } from '@testing-library/react'
 import AdviceList from './AdviceList'
 import adviceReducer from '../redux/advice.slice'
@@ -51,7 +51,10 @@ describe('AdviceList', () => {
       ui,
       {
         initialState = {},
-        store = createStore(adviceReducer, initialState),
+        store = configureStore({
+          reducer: adviceReducer,
+          preloadedState: initialState,
+        }),
         ...renderOptions
       } = {},
     ) {
