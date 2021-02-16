@@ -1,9 +1,7 @@
 import { useSelector } from 'react-redux'
 import { selectAdviceById } from '../redux/advice.slice'
 
-export default function AdviceSlip({ id }) {
-  const slip = useSelector((state) => selectAdviceById(state, id))
-
+function AdviceSlip({ slip }) {
   return (
     <div className="box">
       <article className="media">
@@ -16,4 +14,10 @@ export default function AdviceSlip({ id }) {
       </article>
     </div>
   )
+}
+
+export default function AdviceSlipContainer({ id }) {
+  const slip = useSelector((state) => selectAdviceById(state, id))
+
+  return <AdviceSlip slip={slip} />
 }
