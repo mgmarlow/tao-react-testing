@@ -52,7 +52,7 @@ describe('AdviceList', () => {
       {
         initialState = {},
         store = configureStore({
-          reducer: adviceReducer,
+          reducer: { advice: adviceReducer },
           preloadedState: initialState,
         }),
         ...renderOptions
