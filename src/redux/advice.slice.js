@@ -46,6 +46,7 @@ const adviceSlice = createSlice({
 export const {
   selectIds: selectAdviceIds,
   selectById: selectAdviceById,
+  selectEntities: selectAdviceEntities,
 } = adviceAdapter.getSelectors((state) => state.advice)
 
 export const selectAdviceStatus = (state) => state.advice.status
