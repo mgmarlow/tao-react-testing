@@ -9,9 +9,11 @@ slide:
   ui:
     sidebar: true
     vertical: false
-    pagination: # bullets | progressbar | fraction
+    pagination: bullets # bullets | progressbar | fraction
     effect: # fade | cube | flip
   code:
-    # https://prismjs.com/
+    languages:
+      - javascript
+      - html
     plugins: []
-    theme: default # coy | dark | funky | okaidia | solarizedlight | tomorrow | twilight
+    theme: tomorrow # coy | dark | funky | okaidia | solarizedlight | tomorrow | twilight

@@ -1,7 +1,8 @@
+/* @import 'prismjs/themes/prism-twilight.css'; */
 /* themes */
 /* When nothing is loaded, the default theme will be applied. */
 /* see https://github.com/hiroppy/fusuma#themes */
-/* @import '@fusuma/client/assets/style/themes/pop.css'; */
+@import '@fusuma/client/assets/style/themes/pop.css';
 /* @import '@fusuma/client/assets/style/themes/babel.css'; */
 /* @import '@fusuma/client/assets/style/themes/webpack.css'; */
 /* @import '@fusuma/client/assets/style/themes/node.css'; */
